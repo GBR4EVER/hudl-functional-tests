@@ -1,17 +1,32 @@
-from behave import given, when, then
-from framework.webapp import WebApp
+from behave import given, when
+from framework.webapp import webapp
 
 
-@given('I load the website')
+@given('the user loads the website')
 def step_impl_load_website(context):
-    WebApp.load_website()
+    try:
+        webapp.load_website()
+    except:
+        print("Can't load website")
+        webapp.driver.quit()
 
 
-@when('I go to "{page}" page')
-def step_impl_goto_page(context, page):
-  WebApp.goto_page(page)
+@given('the user selects to login from the welcome page')
+def step_impl_click_login(context):
+    try:
+        webapp.click_nav_login()
+    except:
+        print("Can't locate login button")
+        webapp.driver.quit()
 
 
-@then('I see this "{component}" page')
-def step_impl_verify_component(context, component):
-  WebApp.verify_nav_button_exists(component)
+@given('the user inputs an valid username and password')
+def step_impl_input_credentials(context):
+    webapp.input_credentials()
+
+
+@when('the user selects the login button from the login page')
+def step_impl_goto_page(context):
+    webapp.click_login()
+
+
