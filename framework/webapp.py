@@ -46,6 +46,10 @@ class WebApp:
         password = self.driver.find_element_by_id('password')
         password.send_keys('GBR4EVER')
 
+    def input_invalid_credentials(self):
+        username = self.driver.find_element_by_id('email')
+        username.send_keys('test')
+
     def click_remember_password(self):
         remember_button = self.driver.find_element_by_id('remember-me')
         remember_button.click()
@@ -57,6 +61,11 @@ class WebApp:
     def verify_user_logged_in(self):
         login_button = self.driver.find_element_by_id('logIn')
         assert login_button is None
+
+    def verify_login_error(self):
+        login_error = self.driver.find_element_by_xpath('/html/body/div[2]/form[1]/div[3]')
+        assert login_error
+        self.driver.quit()
 
     def verify_coach_page(self):
         try:
