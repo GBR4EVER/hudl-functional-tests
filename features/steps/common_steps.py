@@ -3,30 +3,30 @@ from framework.webapp import webapp
 
 
 @given('the user loads the website')
-def step_impl_load_website(context):
+def the_user_loads_the_website(context):
     try:
         webapp.load_website()
     except:
-        print("Can't load website")
+        print("Can't load website.")
         webapp.driver.quit()
 
 
 @given('the user selects to login from the welcome page')
-def step_impl_click_login(context):
+def the_user_selects_to_login_from_the_welcome_page(context):
     try:
         webapp.click_nav_login()
     except:
-        print("Can't locate login button")
+        print("Can't locate login button.")
         webapp.driver.quit()
 
 
 @given('the user inputs an valid username and password')
-def step_impl_input_credentials(context):
+def the_user_inputs_an_valid_username_and_password(context):
     webapp.input_credentials()
 
 
 @when('the user selects the login button from the login page')
-def step_impl_goto_page(context):
+def the_user_selects_the_login_button_from_the_login_page(context):
     webapp.click_login()
 
 

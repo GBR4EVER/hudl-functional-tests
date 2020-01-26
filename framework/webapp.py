@@ -36,14 +36,19 @@ class WebApp:
         try:
             element = WebDriverWait(self, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "btn__blue login")))
             nav_login_button = self.driver.find_element_by_xpath(element)
-        finally:
             nav_login_button.click()
+        except:
+            print("Cannot find nav login.")
 
     def input_credentials(self):
         username = self.driver.find_element_by_id('email')
         username.send_keys('burkleycorey@yahoo.com')
         password = self.driver.find_element_by_id('password')
         password.send_keys('GBR4EVER')
+
+    def click_remember_password(self):
+        remember_button = self.driver.find_element_by_id('remember-me')
+        remember_button.click()
 
     def click_login(self):
         login_button = self.driver.find_element_by_id('logIn')
@@ -57,12 +62,13 @@ class WebApp:
         try:
             assert self.driver.current_url("https://www.hudl.com/home")
         except:
-            print("User not successfully routed to home page")
+            print("User not successfully routed to home page.")
 
-        try:
-            self.driver.quit()
-        except:
-            print("Unable to quit browser")
+        # TODO Need to determine how to quit Webdriver properly.
+        # try:
+        #     self.driver.close()
+        # except:
+        #     print("Unable to close the Webdriver.")
 
 
 webapp = WebApp.get_instance()
